@@ -25,6 +25,6 @@ This repository is for my Tech Academy Python projects.
 **Built with:** Python<br>
 **Features:** classes (parent/child); inheritance; class methods.
 #### Project 5 - Student Tracking
-**Overview:** We created a student database front end in Tkinter. It connects to a database to save and and get data to then display.
+**Overview:** We created a student database front end in Tkinter. It connects to a database to save and and get data to then display.<br>
 **Built with:** Python, Tkinter, SQL<br>
 **Features:** Tkinter GUI; Database connection; SQL statements.
