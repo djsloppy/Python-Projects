@@ -21,7 +21,7 @@ class ParentWindow(Frame):
         self.source_dir = Entry(width=75)
         # Postions entry in GUI using tkinter grid() padx and pady are the same as
         # the button to ensure they will line up
-        self.source_dir.grid(row=0, column=1, columnspan=2, padx=(20,10), pady=(30,0))
+        self.source_dir.grid(row=0, column=1, columnspan=3, padx=(20,10), pady=(30,0))
         
         # Creates button to select destination of files from destination directory
         self.destDir_btn = Button(text='Select Destination', width=20, command=self.destDir)
@@ -33,17 +33,17 @@ class ParentWindow(Frame):
         self.destination_dir = Entry(width=75)
         # Positions entry in GUI using tkinter grid() padx and pady are the same as
         # the button to ensure they will line up
-        self.destination_dir.grid(row=1, column=1, columnspan=2, padx=(20,10), pady=(15,10))
+        self.destination_dir.grid(row=1, column=1, columnspan=3, padx=(20,10), pady=(15,10))
 
         # Creates button to transfer files
         self.transfer_btn = Button(text='Transfer Files', width=20, command=self.transferFiles)
         # Positions transfer files button
-        self.transfer_btn.grid(row=2, column=1, padx=(200,0), pady=(0,15))
+        self.transfer_btn.grid(row=2, column=2, padx=(140,0), pady=(0,15), sticky=E)
 
         # Creates an exit button
         self.exit_btn = Button(text='Exit', width=20, command=self.exit_program)
         # Positions the exit button
-        self.exit_btn.grid(row=2, column=2, padx=(10,40), pady=(0,15))
+        self.exit_btn.grid(row=2, column=3, padx=(5,10), pady=(0,15), sticky=E)
 
     # Creates function to select source directory
     def sourceDir(self):
@@ -73,7 +73,8 @@ class ParentWindow(Frame):
         source_files = os.listdir(source)
         # Gets the current time
         currentTime = datetime.datetime.now()
-        print('Current Time is {}\n'.format(currentTime))
+        count = 0
+        files = 0
         # Runs through each file in the source directory
         for i in source_files:
             # sets a variable to the file with path
@@ -86,9 +87,15 @@ class ParentWindow(Frame):
             if (fileTime + timedelta(hours=24)) > currentTime:
                 # Moves each file from the source to the destination
                 shutil.move(source + '/' + i, destination)
-                print(i + ' was successfully transferred.')
+                count += 1
             else:
                 print(i + ' is older than 24 hours and not transferred.')
+            files += 1
+        msg = StringVar()
+        msg = str(count) + ' file(s) of ' + str(files) +' moved successfully.'
+        self.message = Label(root, text=msg)
+        self.message.grid(row=2, column=0,columnspan=2,padx=(25,0), pady=(0,15))
+        
 
     # Creates function to exit program
     def exit_program(self):
